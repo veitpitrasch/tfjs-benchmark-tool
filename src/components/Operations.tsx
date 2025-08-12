@@ -31,11 +31,11 @@ export const Operations: React.FunctionComponent<IResNetProps> = (props) => {
     const [profile, setProfile] = useState<ProfileInfo | null>(null);
     const [timeAverage, setTimeAverage] = useState<number | null>(null);
     const [isRunning, setIsRunning] = useState<boolean>(false);
-    const batch = 8;
-    const height = 1024;
-    const width = 1024;
+    const batch = 1;
+    const height = 256;
+    const width = 256;
     const inChannels = 3;
-    const outChannels = 64;
+    const outChannels = 16;
     const filterSize = 7;
 
     const setTensor = async () => {
