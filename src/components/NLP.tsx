@@ -75,7 +75,6 @@ export const NLP: React.FunctionComponent<INLPProps> = (props) => {
         const end = performance.now();
         setInitializationTime(end - start);
         setModel(loadedModel);
-        console.log(loadedModel);
     };
 
     const detect = async () => {
@@ -86,9 +85,12 @@ export const NLP: React.FunctionComponent<INLPProps> = (props) => {
         let times = [];
         for (let i = 0; i < props.epochRounds; i++) {
             const start = performance.now();
-            const profile = await tf.profile(() => {
-                // @ts-ignore
-                return model.findAnswers(question, passage);
+            const profile = await tf.profile(async () => {
+                const timing = await tf.time(() => {
+                    // @ts-ignore
+                    return model.findAnswers(question, passage);
+                });
+                console.log(`Kernel: ${timing.kernelMs} ms, Wall: ${timing.wallMs} ms`);
             });
             const end = performance.now();
             times.push(end - start);

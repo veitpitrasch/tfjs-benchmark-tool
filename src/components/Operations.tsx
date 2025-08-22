@@ -106,7 +106,7 @@ export const Operations: React.FunctionComponent<IResNetProps> = (props) => {
         setIsRunning(true);
         await tf.setBackend(props.backend);
         await tf.ready();
-        tf.conv2d(tf.zeros([1, 8, 8, 3]) as tf.Tensor4D, tf.zeros([3, 3, 3, 8]), 1, 'same').dataSync();
+        await tf.conv2d(tf.zeros([1, 8, 8, 3]) as tf.Tensor4D, tf.zeros([3, 3, 3, 8]), 1, 'same').data();
         const input = tf.randomNormal([batch, height, width, inChannels]) as tf.Tensor4D;
         const filter = tf.randomNormal([filterSize, filterSize, inChannels, outChannels]) as tf.Tensor4D;
         let times = [];

@@ -140,7 +140,8 @@ export const RNN: React.FC<IRNNProps> = (props) => {
     }
 
     const generate = async () => {
-        console.log(tf.getBackend());
+        await tf.setBackend(props.backend);
+        await tf.ready();
         const charSet = charSetRef.current;
         if (!model || charSet.length === 0) {
             return;
